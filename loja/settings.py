@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'produto',
     'pedido',
+    'perfil',
 
     # TODO: Remover debub toolbar
     'debug_toolbar',
