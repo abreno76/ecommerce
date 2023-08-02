@@ -9,5 +9,6 @@ app_name = 'pedido'
 urlpatterns = [
     path('pagar/', views.Pagar.as_view(), name='pagar'),
     path('fecharpedido/', views.FecharPedido.as_view(), name='fecharpedido'),
-    path('detalhe/int:pk', views.Detalhe.as_view(), name='detalhe'),
+    path('lista/', views.Lista.as_view(), name='lista'),
+    path('detalhe/<int:pk>', views.Detalhe.as_view(), name='detalhe'),
 ]

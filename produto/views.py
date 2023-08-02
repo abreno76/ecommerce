@@ -159,6 +159,6 @@ class Carrinho(View):
         )
 
 
-class Finalizar(View):
+class ResumoDoCarrinho(View):
     def get(self, *args, **kwargs):
         return HttpResponse('Finalizar')
