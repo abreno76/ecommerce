@@ -51,12 +51,8 @@ class Perfil(models.Model):
                                   ('TO', 'Tocantins'),
                               ))
 
-    class Meta:
-        verbose_name = 'Perfil'
-        verbose_name_plural = 'Perfis'
-
     def __str__(self):
-        return self.usuario
+        return f'{self.usuario}'
 
     def clean(self):
         error_messages = {}
@@ -69,3 +65,7 @@ class Perfil(models.Model):
 
         if error_messages:
             raise ValidationError(error_messages)
+
+    class Meta:
+        verbose_name = 'Perfil'
+        verbose_name_plural = 'Perfis'
