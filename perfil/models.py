@@ -8,8 +8,8 @@ from utils.validacpf import valida_cpf
 
 
 class Perfil(models.Model):
-    usuario = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name='usuário')
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE,
+                                   verbose_name='Usuário')
     idade = models.PositiveIntegerField()
     data_nascimento = models.DateField()
     cpf = models.CharField(max_length=11)
