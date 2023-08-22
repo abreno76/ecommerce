@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import redirect, render, reverse
+from django.shortcuts import redirect, reverse
 from django.views import View
 from django.views.generic import DetailView, ListView
 
@@ -22,18 +22,17 @@ class DispatchLoginRequiredMixin(View):
         qs = qs.filter(usuario=self.request.user)
         return qs
 
+    # def get_queryset(self, *args, **kwargs):
+    #     qs = super().get_queryset(*args, **kwargs)
+    #     qs = qs.filter(usuario=self.request.user)
+    #     return qs
+
 
 class Pagar(DispatchLoginRequiredMixin, DetailView):
     template_name = 'pedido/pagar.html'
     model = Pedido
     pk_url_kwarg = 'pk'
     context_object_name = 'pedido'
-
-    def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset(*args, **kwargs)
-        qs = qs.filter(usuario=self.request.user)
-
-        return qs
 
 
 class SalvarPedido(View):
@@ -136,5 +135,5 @@ class Lista(DispatchLoginRequiredMixin, ListView):
     model = Pedido
     context_object_name = 'pedidos'
     template_name = 'pedido/lista.html'
-    paginate_by = 10
+    paginate_by = 3
     ordering = ['-id']
