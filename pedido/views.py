@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from django.views import View
 from django.views.generic import DetailView, ListView
 
@@ -23,13 +23,21 @@ class DispatchLoginRequiredMixin(View):
         return qs
 
 
-class Pagar(View):
-    def get(self, *args, **kwargs):
-        return HttpResponse('Fechar Pedido')
+class Pagar(DispatchLoginRequiredMixin, DetailView):
+    template_name = 'pedido/pagar.html'
+    model = Pedido
+    pk_url_kwarg = 'pk'
+    context_object_name = 'pedido'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        qs = qs.filter(usuario=self.request.user)
+
+        return qs
 
 
 class SalvarPedido(View):
-    template_name = 'pedido/pagar.html'
+    template_name = 'pedido/salvarpedido.html'
 
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
@@ -108,7 +116,13 @@ class SalvarPedido(View):
             ]
         )
         del self.request.session['carrinho']
-        return redirect('pedido:lista')
+        return redirect(
+            reverse(
+                'pedido:pagar',
+                kwargs={
+                    'pk': pedido.pk
+                })
+        )
 
 
 class Detalhe(DispatchLoginRequiredMixin, DetailView):
