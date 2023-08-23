@@ -46,8 +46,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
 
-    # TODO: Remover debub toolbar
-    'debug_toolbar',
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -62,15 +60,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # TODO: Remover debub toolbar
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-]
-
-# TODO: Remover IPS debugtoobar
-INTERNAL_IPS = [
-    # ...
-    '127.0.0.1',
-    # ...
 ]
 
 
